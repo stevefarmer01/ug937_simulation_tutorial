@@ -267,8 +267,8 @@ update_compile_order
 read_verilog -library xil_defaultlib [ glob ./sim/*v ]
 #read_verilog -library xil_defaultlib [ glob ./sim/*v ]
 
-set_property USED_IN_SYNTHESIS 0 [get_files /c/projects/fpga/ug937_simulation_tutorial_batch/sim/testbench.v]
-set_property USED_IN_IMPLEMENTATION 0 [get_files /c/projects/fpga/ug937_simulation_tutorial_batch/sim/testbench.v]
+set_property USED_IN_SYNTHESIS 0 [get_files ./sim/testbench.v]
+set_property USED_IN_IMPLEMENTATION 0 [get_files ./sim/testbench.v]
 
 ##Read packages first manually as when globbed 'export simulation' command seems to do them in alphabetical order (eg those with suffix _pkg afterwards)
 #read_vhdl -library work [ glob ../../../design_definition/hdl/vhdl/testbench/multi_array_types_pkg.vhd ]

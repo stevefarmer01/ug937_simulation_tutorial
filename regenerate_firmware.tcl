@@ -264,11 +264,13 @@ update_compile_order
 ##Read simulation files
 #
 ##All vhdl files
-read_verilog -library xil_defaultlib [ glob ./sim/*v ]
 #read_verilog -library xil_defaultlib [ glob ./sim/*v ]
+#read_verilog -library xil_defaultlib [ glob ./sim/*v ]
+add_files -fileset [get_fileset sim_1] [ glob ./sim/*.v ]
 
-set_property USED_IN_SYNTHESIS 0 [get_files ./sim/testbench.v]
-set_property USED_IN_IMPLEMENTATION 0 [get_files ./sim/testbench.v]
+
+#set_property USED_IN_SYNTHESIS 0 [get_files ./sim/testbench.v]
+#set_property USED_IN_IMPLEMENTATION 0 [get_files ./sim/testbench.v]
 
 ##Read packages first manually as when globbed 'export simulation' command seems to do them in alphabetical order (eg those with suffix _pkg afterwards)
 #read_vhdl -library work [ glob ../../../design_definition/hdl/vhdl/testbench/multi_array_types_pkg.vhd ]
@@ -287,9 +289,21 @@ set_property USED_IN_IMPLEMENTATION 0 [get_files ./sim/testbench.v]
 ##Save project to disk for debuging build scripts to look at synth/impl strategies - this project doesn't find all of it's sources, these may be because it is saved to a subdirectory
 set_property top $simulation_top [get_filesets sim_1]
 update_compile_order
+
 save_project_as exported_project exported_project -force
 
+#close_project
+
+#open_project ./exported_project/exported_project.xpr
+
 synth_design -top ${design_top} -part $part_number
+
+#launch_simulation -mode post-synthesis -type functional -scripts_only
+launch_simulation -mode post-synthesis -type functional
+
+#save_project_as exported_project exported_project -force
+
+close_project
 
 #synth_design -top top -part xc7k70tfbg676-2
 #open_run synth_1 -name netlist_1
@@ -297,7 +311,7 @@ synth_design -top ${design_top} -part $part_number
 #launch_simulation
 ##### source regenerate_firmware.tcl
 
-launch_simulation -mode post-synthesis -type functional
+#launch_simulation -mode post-synthesis -type functional
 #launch_simulation -mode post-synthesis -type functional -simset [get_filesets sim_1]
 #
 #########################################################################################

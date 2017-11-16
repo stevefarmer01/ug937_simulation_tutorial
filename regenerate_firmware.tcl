@@ -303,7 +303,13 @@ launch_simulation -mode post-synthesis -type functional
 
 #save_project_as exported_project exported_project -force
 
+
+export_ip_user_files -force
+export_simulation -force -simulator xsim
+
+
 close_project
+
 
 #synth_design -top top -part xc7k70tfbg676-2
 #open_run synth_1 -name netlist_1

@@ -83,6 +83,11 @@ read_vhdl -library xil_defaultlib [ glob ./sources/*.vhd ]
 set_property top $design_top [get_fileset {sources_1}]
 update_compile_order
 
+read_ip [glob ./sources/ip/**/*.xci]
+update_ip_catalog -rebuild
+report_ip_status
+
+
 ###All verilog files
 #read_verilog -library work [ glob ../../../design_definition/hdl/verilog/*.v ]
 
@@ -300,12 +305,13 @@ synth_design -top ${design_top} -part $part_number
 
 #launch_simulation -mode post-synthesis -type functional -scripts_only
 launch_simulation -mode post-synthesis -type functional
+launch_simulation
 
 #save_project_as exported_project exported_project -force
 
 
-export_ip_user_files -force
-export_simulation -force -simulator xsim
+#export_ip_user_files -force
+#export_simulation -force -simulator xsim
 
 
 close_project

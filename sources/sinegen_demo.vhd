@@ -152,18 +152,18 @@ begin
     end if;
   end process;
 
---  ------------------------------------------------------------
---  --  Sine generator
---  ------------------------------------------------------------
---  U_SINEGEN : sinegen
---    port map
---    (
---      clk   => clk,
----      reset => GPIO_BUTTONS_re(0),
---      reset => reset,
---      sel   => sineSel,
---      sine  => sine
---    );
+  ------------------------------------------------------------
+  --  Sine generator
+  ------------------------------------------------------------
+  U_SINEGEN : sinegen
+    port map
+    (
+      clk   => clk,
+--      reset => GPIO_BUTTONS_re(0),
+      reset => reset,
+      sel   => sineSel,
+      sine  => sine
+    );
 
   ------------------------------------------------------------
   --  Finite state machine
@@ -184,8 +184,8 @@ begin
   LEDS_n(0)   <= sineSel(0);
   LEDS_n(1)   <= sineSel(1);
   LEDS_n(2)   <= GPIO_BUTTONS_re(1);
---  LEDS_n(3)   <= DONT_EAT;
-  LEDS_n(3)   <= GPIO_BUTTONS_re(0);
+  LEDS_n(3)   <= DONT_EAT;
+--  LEDS_n(3)   <= GPIO_BUTTONS_re(0);
 
 
   -- Dummy logic to keep XST from eating the design

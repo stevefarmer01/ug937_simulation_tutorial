@@ -304,8 +304,14 @@ save_project_as exported_project exported_project -force
 synth_design -top ${design_top} -part $part_number
 
 #launch_simulation -mode post-synthesis -type functional -scripts_only
+
 launch_simulation -mode post-synthesis -type functional
+
+#close_project
+
+save_project_as ./exported_project_behav/exported_project_behav exported_project -force
 launch_simulation
+
 
 #save_project_as exported_project exported_project -force
 
@@ -314,7 +320,6 @@ launch_simulation
 #export_simulation -force -simulator xsim
 
 
-close_project
 
 
 #synth_design -top top -part xc7k70tfbg676-2
